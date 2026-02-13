@@ -144,3 +144,4 @@ cython_debug/
 # Large files (optional, but good practice if not using LFS for everything)
 # *.h5
 # !bloodgroup_cnn_model.h5
+.vercel

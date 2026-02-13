@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fingerprint Blood Group Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            color: #ff4b4b;
+            margin-bottom: 0.5rem;
+        }
+        .upload-section {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            background-color: #fafafa;
+            transition: border-color 0.3s;
+        }
+        .upload-section:hover {
+            border-color: #ff4b4b;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ff4b4b;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .custom-file-upload:hover {
+            background-color: #e63e3e;
+        }
+        .result-box {
+            background-color: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .emoji {
+            font-size: 3rem;
+        }
+        .accuracy {
+            color: #666;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🩸 Blood Group Detection</h1>
+        <p>Upload a fingerprint image to predict blood group</p>
+        
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="upload-section">
+                <label for="file-upload" class="custom-file-upload">
+                    📥 Upload Image
+                </label>
+                <input id="file-upload" type="file" name="file" accept=".png, .jpg, .jpeg" onchange="this.form.submit()">
+                <p id="file-name" style="margin-top: 10px; color: #666;"></p>
+            </div>
+        </form>
+
+        {% if prediction %}
+        <div class="result-box">
+            <h2>Prediction Result</h2>
+            <div class="emoji">{{ prediction }}</div>
+            <div class="accuracy">Confidence: {{ confidence }}</div>
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <p><strong>Disclaimer:</strong> For demonstration purposes only. Consult medical professionals for accurate testing.</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('file-upload').onchange = function() {
+            document.getElementById('file-name').textContent = this.files[0].name;
+            this.form.submit();
+        };
+    </script>
+</body>
+</html>
